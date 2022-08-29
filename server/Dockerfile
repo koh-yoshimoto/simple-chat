@@ -9,8 +9,10 @@ ENV ROOTPATH=/go/app
 WORKDIR ${ROOTPATH}
 
 RUN go install github.com/cosmtrek/air@v1.40.0
+# COPY go.mod go.sum .air.toml ./
 COPY go.mod go.sum .air.toml ./
 RUN go mod download
 
 EXPOSE 80
-CMD ["air", "-c", ".air.toml"]
+CMD ["go", "run", "src/main.go"]
+# CMD ["air", "-c", ".air.toml"]
